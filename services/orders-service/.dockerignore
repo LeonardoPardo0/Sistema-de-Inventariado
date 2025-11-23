@@ -1,0 +1,40 @@
+# Node modules (se instalarán dentro del contenedor)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# Control de versiones
+.git/
+.gitignore
+
+# Archivos Docker
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+logs/
+
+# Testing
+coverage/
+.nyc_output/
+
+# Temporales
+tmp/
+temp/
+*.tmp
+
+# Documentación
+README.md
+docs/
