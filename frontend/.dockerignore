@@ -1,0 +1,35 @@
+# Archivos de desarrollo
+node_modules/
+npm-debug.log
+yarn-error.log
+.DS_Store
+.env
+.env.local
+.env.*.local
+
+# Archivos de control de versiones
+.git/
+.gitignore
+.gitattributes
+
+# Archivos Docker
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos temporales
+*.log
+*.tmp
+tmp/
+temp/
+
+# Documentación
+README.md
+*.md
