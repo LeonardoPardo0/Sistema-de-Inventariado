@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario - Sistema de Microservicios</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar (mismo que dashboard) -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-circle small">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <h3>Microservicios</h3>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="administrador-dashboard.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="products.html" class="nav-item">
+                    <span class="nav-icon">📦</span>
+                    <span>Productos</span>
+                </a>
+                <a href="inventory.html" class="nav-item active">
+                    <span class="nav-icon">🏬</span>
+                    <span>Inventario</span>
+                </a>
+                <a href="orders.html" class="nav-item">
+                    <span class="nav-icon">🧾</span>
+                    <span>Órdenes</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">💳</span>
+                    <span>Facturación</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">📈</span>
+                    <span>Reportes</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn btn-danger btn-block">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Gestión de Inventario</h1>
+                    <p class="header-subtitle">Control de stock y almacenes</p>
+                </div>
+                <div class="header-right">
+                    <button id="btnNewInventory" class="btn btn-primary">
+                        + Nuevo Registro
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Filtros -->
+                <div class="filters-section">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Buscar por producto...">
+                    </div>
+                    <div class="filter-group">
+                        <select id="statusFilter">
+                            <option value="">Todos</option>
+                            <option value="Disponible">Disponible</option>
+                            <option value="Bajo_Stock">Stock Bajo</option>
+                            <option value="Agotado">Agotado</option>
+                            <option value="Descontinuado">Descontinuado</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <select id="warehouseFilter">
+                            <option value="">Todos los almacenes</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Grid de Inventario -->
+                <div id="inventoryGrid" class="products-grid">
+                    <!-- Los registros de inventario se cargarán aquí -->
+                </div>
+
+                <div class="section-divider">
+                    <h2>🏭 Gestión de Almacenes</h2>
+                    <button id="btnNewWarehouse" class="btn btn-primary btn-sm">
+                        + Nuevo Almacén
+                    </button>
+                </div>
+
+                <div id="warehousesGrid" class="warehouses-grid">
+                    <!-- Los almacenes se cargarán aquí -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para gestionar inventario -->
+    <div id="inventoryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Nuevo Registro de Inventario</h2>
+                <span class="modal-close" id="closeModal">&times;</span>
+            </div>
+            <form id="inventoryForm">
+                <div class="form-group">
+                    <label for="productSelect">Producto *</label>
+                    <select id="productSelect" required>
+                        <option value="">Seleccionar producto</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="productIdDisplay">ID del Producto</label>
+                    <input type="text" id="productIdDisplay" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="productNameDisplay">Nombre del Producto</label>
+                    <input type="text" id="productNameDisplay" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity">Stock Inicial *</label>
+                    <input type="number" id="quantity" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Ubicación (Almacén) *</label>
+                    <select id="location" required>
+                        <option value="">Seleccionar almacén</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="minStock">Stock Mínimo</label>
+                    <input type="number" id="minStock" min="0" value="10">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancelar</button>
+                    <button type="submit" form="inventoryForm" class="btn btn-primary" id="saveBtn">
+                        <span class="btn-text">Guardar</span>
+                        <span class="btn-loader" style="display: none;">⏳</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para gestionar almacenes -->
+    <div id="warehouseModal" class="modal">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <h2 id="warehouseModalTitle">Nuevo Almacén</h2>
+                <span class="modal-close" id="closeWarehouseModal">&times;</span>
+            </div>
+            <form id="warehouseForm">
+                <input type="hidden" id="warehouseId">
+                
+                <div class="form-group">
+                    <label for="warehouseCode">Código del Almacén *</label>
+                    <input type="text" id="warehouseCode" placeholder="Ej: ALM-001" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="warehouseName">Nombre *</label>
+                    <input type="text" id="warehouseName" placeholder="Ej: Almacén Central" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="warehouseAddress">Dirección</label>
+                    <textarea id="warehouseAddress" rows="2" placeholder="Dirección del almacén"></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelWarehouseBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="saveWarehouseBtn">
+                        <span class="btn-text">Guardar</span>
+                        <span class="btn-loader" style="display: none;">⏳</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/products-api.js"></script>
+    <script src="../../assets/js/inventory-api.js"></script>
+    <script src="../../assets/js/inventory.js"></script>
+</body>
+</html>

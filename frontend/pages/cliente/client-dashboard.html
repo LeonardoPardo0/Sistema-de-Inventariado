@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Panel - Sistema de Microservicios</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar Cliente -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-circle small">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <h3>Mi Panel</h3>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="cliente/client-dashboard.html" class="nav-item active">
+                    <span class="nav-icon">🏠</span>
+                    <span>Inicio</span>
+                </a>
+                <a href="client-products.html" class="nav-item">
+                    <span class="nav-icon">📦</span>
+                    <span>Productos</span>
+                </a>
+                <a href="client-orders.html" class="nav-item">
+                    <span class="nav-icon">🧾</span>
+                    <span>Mis Pedidos</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn btn-danger btn-block">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Bienvenido</h1>
+                    <p class="header-subtitle" id="welcomeMessage">Cargando...</p>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="user-details">
+                            <span class="user-name" id="userName">Cliente</span>
+                            <span class="user-role">Cliente</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Estadísticas del cliente -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🧾</div>
+                        <div class="stat-details">
+                            <h3>Mis Pedidos</h3>
+                            <p class="stat-value" id="totalOrders">-</p>
+                            <small>Total realizados</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">⏳</div>
+                        <div class="stat-details">
+                            <h3>Pendientes</h3>
+                            <p class="stat-value" id="pendingOrders">-</p>
+                            <small>En proceso</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-details">
+                            <h3>Entregados</h3>
+                            <p class="stat-value" id="deliveredOrders">-</p>
+                            <small>Completados</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card clickable" onclick="window.location.href='client-products.html'">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-details">
+                            <h3>Catálogo</h3>
+                            <p class="stat-value" id="totalProducts">-</p>
+                            <small>Productos disponibles</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acciones rápidas -->
+                <div class="info-card">
+                    <h3>🚀 Acciones Rápidas</h3>
+                    <div class="quick-actions">
+                        <a href="client-products.html" class="btn btn-primary">
+                            📦 Ver Productos
+                        </a>
+                        <a href="client-orders.html" class="btn btn-secondary">
+                            🧾 Mis Pedidos
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Últimos pedidos -->
+                <div class="info-card">
+                    <h3>📋 Últimos Pedidos</h3>
+                    <div id="recentOrders" class="recent-orders">
+                        <p>Cargando...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/products-api.js"></script>
+    <script src="/assets/js/orders-api.js"></script>
+    <script src="/assets/js/client-dashboard.js"></script>
+</body>
+</html>

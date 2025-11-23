@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Microservicios</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-circle small">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <h3>Microservicios</h3>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="administrador-dashboard.html" class="nav-item active">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="products.html" class="nav-item">
+                    <span class="nav-icon">📦</span>
+                    <span>Productos</span>
+                </a>
+                <a href="inventory.html" class="nav-item">
+                    <span class="nav-icon">🏬</span>
+                    <span>Inventario</span>
+                </a>
+                <a href="orders.html" class="nav-item">
+                    <span class="nav-icon">🧾</span>
+                    <span>Órdenes</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">💳</span>
+                    <span>Facturación</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">📈</span>
+                    <span>Reportes</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn btn-danger btn-block">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Dashboard</h1>
+                    <p class="header-subtitle">Bienvenido al sistema de gestión</p>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar" id="userAvatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="user-details">
+                            <span class="user-name" id="userName">Cargando...</span>
+                            <span class="user-role" id="userRole">...</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-details">
+                            <h3>Productos</h3>
+                            <p class="stat-value">-</p>
+                            <small>Total en catálogo</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">🏬</div>
+                        <div class="stat-details">
+                            <h3>Inventario</h3>
+                            <p class="stat-value">-</p>
+                            <small>Items en stock</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">🧾</div>
+                        <div class="stat-details">
+                            <h3>Órdenes</h3>
+                            <p class="stat-value">-</p>
+                            <small>Pendientes</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-details">
+                            <h3>Ventas</h3>
+                            <p class="stat-value">-</p>
+                            <small>Este mes</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>🎯 Información del Usuario</h3>
+                    <div id="userProfile" class="profile-info">
+                        <p>Cargando información...</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>🚀 Servicios Disponibles</h3>
+                    <ul class="services-list">
+                        <li><strong>Auth Service:</strong> Sistema de autenticación ✅</li>
+                        <li><strong>Products Service:</strong> Gestión de productos ✅</li>
+                        <li><strong>Inventory Service:</strong> Control de inventario ✅</li>
+                        <li><strong>Orders Service:</strong> Gestión de pedidos ✅</li>
+                        <li><strong>Billing Service:</strong> Facturación (próximamente)</li>
+                        <li><strong>Reports Service:</strong> Reportes analíticos (próximamente)</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/products-api.js"></script>
+    <script src="../../assets/js/inventory-api.js"></script>
+    <script src="../../assets/js/orders-api.js"></script>
+    <script src="../../assets/js/administrador-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Órdenes - Sistema de Microservicios</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-circle small">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <h3>Microservicios</h3>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="administrador-dashboard.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="products.html" class="nav-item">
+                    <span class="nav-icon">📦</span>
+                    <span>Productos</span>
+                </a>
+                <a href="inventory.html" class="nav-item">
+                    <span class="nav-icon">🏬</span>
+                    <span>Inventario</span>
+                </a>
+                <a href="orders.html" class="nav-item active">
+                    <span class="nav-icon">🧾</span>
+                    <span>Órdenes</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">💳</span>
+                    <span>Facturación</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">📈</span>
+                    <span>Reportes</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn btn-danger btn-block">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Gestión de Órdenes</h1>
+                    <p class="header-subtitle">Administra pedidos y estados</p>
+                </div>
+                <div class="header-right">
+                    <button id="btnNewOrder" class="btn btn-primary">
+                        ➕ Nueva Orden
+                    </button>
+                </div>
+            </header>
+
+            <!-- Filters -->
+            <div class="filters-bar">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Buscar por ID de orden...">
+                </div>
+                <select id="statusFilter" class="filter-select">
+                    <option value="">Todos los estados</option>
+                    <option value="pendiente">Pendiente</option>
+                    <option value="pagada">Pagada</option>
+                    <option value="enviada">Enviada</option>
+                    <option value="entregada">Entregada</option>
+                    <option value="cancelada">Cancelada</option>
+                </select>
+            </div>
+
+            <!-- Error/Success Messages -->
+            <div id="errorMessage" class="alert alert-error" style="display: none;"></div>
+            <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+
+            <!-- Orders Grid -->
+            <div id="ordersGrid" class="orders-grid">
+                <div class="loading">Cargando órdenes...</div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Nueva Orden -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Nueva Orden</h2>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="shippingAddress">Dirección de Envío *</label>
+                    <textarea 
+                        id="shippingAddress" 
+                        class="form-control" 
+                        rows="3" 
+                        placeholder="Calle, ciudad, código postal..."
+                        required
+                        minlength="10"
+                    ></textarea>
+                    <small>Mínimo 10 caracteres</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Productos</label>
+                    <div id="itemsContainer">
+                        <div class="order-item">
+                            <select class="form-control product-select" required>
+                                <option value="">Seleccionar producto...</option>
+                            </select>
+                            <input 
+                                type="number" 
+                                class="form-control quantity-input" 
+                                placeholder="Cantidad" 
+                                min="1" 
+                                value="1"
+                                required
+                            >
+                            <button type="button" class="btn btn-sm btn-danger remove-item">✖</button>
+                        </div>
+                    </div>
+                    <button type="button" id="btnAddItem" class="btn btn-sm btn-secondary">
+                        ➕ Agregar Producto
+                    </button>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="cancelBtn" class="btn btn-secondary">
+                        Cancelar
+                    </button>
+                    <button type="submit" id="saveBtn" class="btn btn-primary">
+                        <span class="btn-text">Crear Orden</span>
+                        <span class="btn-loader" style="display: none;">⏳</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Detalle de Orden -->
+    <div id="orderDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalle de Orden</h2>
+                <span class="close" id="closeDetailModal">&times;</span>
+            </div>
+            <div id="orderDetailContent" class="order-detail-content">
+                <!-- Se llena dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/products-api.js"></script>
+    <script src="../../assets/js/orders-api.js"></script>
+    <script src="../../assets/js/orders.js"></script>
+</body>
+</html>

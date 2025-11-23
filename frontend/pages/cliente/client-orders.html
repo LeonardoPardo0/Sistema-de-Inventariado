@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pedidos - Sistema de Microservicios</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar Cliente -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-circle small">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <h3>Mi Panel</h3>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="client-dashboard.html" class="nav-item">
+                    <span class="nav-icon">🏠</span>
+                    <span>Inicio</span>
+                </a>
+                <a href="client-products.html" class="nav-item">
+                    <span class="nav-icon">📦</span>
+                    <span>Productos</span>
+                </a>
+                <a href="client-orders.html" class="nav-item active">
+                    <span class="nav-icon">🧾</span>
+                    <span>Mis Pedidos</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn btn-danger btn-block">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Mis Pedidos</h1>
+                    <p class="header-subtitle">Historial de tus compras</p>
+                </div>
+                <div class="header-right">
+                    <a href="client-products.html" class="btn btn-primary">
+                        ➕ Nuevo Pedido
+                    </a>
+                </div>
+            </header>
+
+            <!-- Filtros -->
+            <div class="filters-bar">
+                <select id="statusFilter" class="filter-select">
+                    <option value="">Todos los estados</option>
+                    <option value="pendiente">Pendiente</option>
+                    <option value="pagada">Pagada</option>
+                    <option value="enviada">Enviada</option>
+                    <option value="entregada">Entregada</option>
+                    <option value="cancelada">Cancelada</option>
+                </select>
+            </div>
+
+            <!-- Mensajes -->
+            <div id="errorMessage" class="alert alert-error" style="display: none;"></div>
+            <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+
+            <!-- Grid de Pedidos -->
+            <div id="ordersGrid" class="orders-grid">
+                <div class="loading">Cargando pedidos...</div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Detalle de Orden -->
+    <div id="orderDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalle del Pedido</h2>
+                <span class="modal-close" id="closeDetailModal">&times;</span>
+            </div>
+            <div id="orderDetailContent" class="order-detail-content">
+                <!-- Se llena dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/orders-api.js"></script>
+    <script src="../../assets/js/client-orders.js"></script>
+</body>
+</html>

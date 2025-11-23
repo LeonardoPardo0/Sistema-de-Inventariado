@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Sistema de Microservicios</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar Cliente -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-circle small">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <h3>Mi Panel</h3>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="client-dashboard.html" class="nav-item">
+                    <span class="nav-icon">🏠</span>
+                    <span>Inicio</span>
+                </a>
+                <a href="client-products.html" class="nav-item active">
+                    <span class="nav-icon">📦</span>
+                    <span>Productos</span>
+                </a>
+                <a href="client-orders.html" class="nav-item">
+                    <span class="nav-icon">🧾</span>
+                    <span>Mis Pedidos</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn btn-danger btn-block">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Catálogo de Productos</h1>
+                    <p class="header-subtitle">Explora nuestros productos disponibles</p>
+                </div>
+                <div class="header-right">
+                    <button id="btnViewCart" class="btn btn-primary">
+                        🛒 Carrito (<span id="cartCount">0</span>)
+                    </button>
+                </div>
+            </header>
+
+            <!-- Filtros -->
+            <div class="filters-section">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="🔍 Buscar productos...">
+                </div>
+                <div class="filter-group">
+                    <select id="categoryFilter">
+                        <option value="">Todas las categorías</option>
+                        <option value="electronics">Electrónica</option>
+                        <option value="clothing">Ropa</option>
+                        <option value="food">Alimentos</option>
+                        <option value="books">Libros</option>
+                        <option value="other">Otros</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Grid de Productos -->
+            <div id="productsGrid" class="products-grid client-view">
+                <div class="loading">Cargando productos...</div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Carrito -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🛒 Mi Carrito</h2>
+                <span class="modal-close" id="closeCartModal">&times;</span>
+            </div>
+            <div id="cartItems" class="cart-items">
+                <!-- Items del carrito -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <strong>Total: $<span id="cartTotal">0.00</span></strong>
+                </div>
+                <div class="cart-actions">
+                    <button type="button" class="btn btn-secondary" id="clearCartBtn">Vaciar Carrito</button>
+                    <button type="button" class="btn btn-primary" id="checkoutBtn">Realizar Pedido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Checkout -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📦 Finalizar Pedido</h2>
+                <span class="modal-close" id="closeCheckoutModal">&times;</span>
+            </div>
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label for="shippingAddress">Dirección de Envío *</label>
+                    <textarea id="shippingAddress" rows="3" placeholder="Ingresa tu dirección completa..." required minlength="10"></textarea>
+                    <small>Mínimo 10 caracteres</small>
+                </div>
+                
+                <div class="order-summary">
+                    <h3>Resumen del Pedido</h3>
+                    <div id="orderSummary"></div>
+                    <div class="summary-total">
+                        <strong>Total a Pagar: $<span id="summaryTotal">0.00</span></strong>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelCheckoutBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="confirmOrderBtn">
+                        <span class="btn-text">Confirmar Pedido</span>
+                        <span class="btn-loader" style="display: none;">⏳</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../assets/js/api.js"></script>
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/products-api.js"></script>
+    <script src="../../assets/js/orders-api.js"></script>
+    <script src="../../assets/js/client-products.js"></script>
+</body>
+</html>
