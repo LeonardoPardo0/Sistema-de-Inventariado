@@ -1,0 +1,12 @@
+📦 Auth Service Database
+mongodb://admin:admin123@localhost:27017/authdb?authSource=admin
+📦 Products Service Database
+mongodb://admin:admin123@localhost:27018/productsdb?authSource=admin
+📦 Inventory Service Database
+mongodb://admin:admin123@localhost:27019/inventorydb?authSource=admin
+📦 Orders Service Database
+mongodb://admin:admin123@localhost:27020/ordersdb?authSource=admin
+📦 Billing Service Database
+mongodb://admin:admin123@localhost:27021/billingdb?authSource=admin
+📦 Reports Service Database
+mongodb://admin:admin123@localhost:27022/reportsdb?authSource=admin
