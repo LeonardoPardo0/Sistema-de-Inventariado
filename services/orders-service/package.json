@@ -1,0 +1,27 @@
+﻿{
+  "name": "orders-service",
+  "version": "1.0.0",
+  "description": "Servicio de gestión de órdenes - Sistema de Microservicios",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": ["microservices", "orders", "e-commerce"],
+  "author": "Grupo 3",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.6.3",
+    "axios": "^1.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "joi": "^17.11.0",
+    "swagger-ui-express": "^5.0.0",
+    "swagger-jsdoc": "^6.2.8"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
